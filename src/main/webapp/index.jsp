@@ -1,4 +1,5 @@
-<%@ page import="bg.tuvarna.cs.domain.entities.User" %>
+<%@ page import="bg.tu_varna.cs.domain.entities.User" %>
+<%@ page import="bg.tu_varna.cs.domain.entities.UserSource" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,45 +30,87 @@
         }else {
            user = (User) session.getAttribute("user");
         }
+
+        User userByID;
+        if(request.getParameter("user") != null) {
+            int id = Integer.parseInt(request.getParameter("user"));
+
+            ServletContext ctx = request.getServletContext();
+            UserSource users = (UserSource) ctx.getAttribute("users");
+            userByID = users.getById(id);
+        }else {
+            userByID = new User();
+        }
     %>
 
     <div class="header">
         <% if(session.getAttribute("user") != null) { %>
         <div class="nav-btn">
-            <a href="editprofile">Profile</a>
+            <a href="editprofile">Редактиране на профил</a>
         </div>
 
         <div class="nav-btn">
-            <a href="logout">Logout</a>
+            <a href="logout">Излизане</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="profiles">Профили</a>
         </div>
         <%} else{ %>
 
         <div class="nav-btn">
-            <a href="login">Login</a>
+            <a href="login">Вход</a>
         </div>
 
         <div class="nav-btn">
-            <a href="register">Register</a>
+            <a href="register">Регистрация</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="profiles">Профили</a>
         </div>
         <%} %>
     </div>
-    <% if(session.getAttribute("user") != null) { %> Добре дошли, <% out.print(user.getLogin()); %>
-    <button id="exit" name="exit">Изключи</button><script type="text/javascript">
+    <% if(session.getAttribute("user") != null) { %>
+    <div class="title">Добре дошъл, <% out.print(user.getLogin()); %></div>
+    <button id="exit" name="exit" class="exit">Изключи</button>
+    <%
+        boolean isTrue = false;
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ((cookie.getName()).compareTo("exit") == 0) {
+                    out.println("<div class='title'>" + cookie.getValue() + " expired in 24 hours " + "</div><br/>");
+                    isTrue = true;
+                }
+            }
+            if(isTrue) {
+                 %>
+                <script>
+                    $('#exit').css("display", "none");
+                </script>
+                <%
+            }else {
+                %>
+                <script>
+                    $('#exit').css("display", "block");
+                </script>
+                <%
+            }
+        }
+    }
+    %>
+    <script type="text/javascript">
         let exit = $("#exit");
-
-        //TODO: request is failed with error code: 500, have to fix it
 
         exit.on('click', function() {
             $.ajax({
-                url: 'UserServlet',
-                method: 'post',
-                data: 'exit',
-                success: alert("Successfully send 'Exit' to URL:")
+                url: 'cookie',
+                method: 'POST',
+                success: alert("Successfully entered button EXIT")
             });
 
         });
     </script>
-    <% } %>
 
     <div class="wrapper">
         <div class="shell">
@@ -78,23 +121,30 @@
                     <h2>Профилна информация</h2>
 
                     <p>Име: <%
-                        assert user != null;
-                        if(user.getFirstName() != null && user.getLastName() != null) {
-                        out.print(user.getFirstName() + " " + user.getLastName());
-                    } %> <br><br>
-                        Работа: <% if(user.getWork() != null) out.print(user.getWork()); %> <br><br>
+                        assert userByID != null;
+                        if(userByID.getFirstName() != null && userByID.getLastName() != null) {
+                            out.print(userByID.getFirstName() + " " + userByID.getLastName());
+                        }else {
+                            userByID.setFirstName("Не съществува име за потребителя");
+                        }
+                     %> <br><br>
+                        Работа: <% if(userByID.getWork() != null) {
+                            out.print(userByID.getWork());
+                        }else userByID.setWork("Не съществува работа за този потребител"); %> <br><br>
 
-                        Описание: <% if(user.getDescribe() != null) {
-                                StringBuffer str = new StringBuffer(user.getDescribe());
+                        Описание: <% if(userByID.getDescribe() != null) {
+                                StringBuffer str = new StringBuffer(userByID.getDescribe());
                                 final int indexOfCut = 50;
 
-                                if(user.getDescribe().length() > indexOfCut)
+                                if(userByID.getDescribe().length() > indexOfCut)
                                 str.insert(indexOfCut, "<br>"); // insert at the n position new line
 
-                                if(user.getDescribe().length() > indexOfCut*2+20)
+                                if(userByID.getDescribe().length() > indexOfCut*2+20)
                                 str.insert(indexOfCut*2+20, "<br>");
 
                                 out.print(str);
+                        }else {
+                            userByID.setDescribe("Няма описание за потребителя все още");
                         }%>
                     </p>
                 </div>
@@ -111,7 +161,7 @@
                             <p>Java</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getJava()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getJava()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -119,7 +169,7 @@
                             <p>HTML</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getHtml()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getHtml()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -127,7 +177,7 @@
                             <p>CSS</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getCss()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getCss()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -135,7 +185,7 @@
                             <p>JavaScript</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getJavascript()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getJavascript()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -147,7 +197,7 @@
                             <p>Комуникативност</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getCommunicative()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getCommunicative()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -155,7 +205,7 @@
                             <p>Екипна работа</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getTeamwork()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getTeamwork()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
@@ -163,7 +213,7 @@
                             <p>Креативност</p>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:<%= user.getTeamwork()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:<%= userByID.getTeamwork()*10 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -176,21 +226,21 @@
                     <div class="left-down-bar">
                         <p>Имейл</p>
 
-                        <p><a href="#"><% if(user.getEmail() != null) out.print(user.getEmail()); %></a></p>
+                        <p><a href="#"><% if(userByID.getEmail() != null) out.print(userByID.getEmail()); %></a></p>
 
                         <p>Телефон</p>
 
-                        <p><a href="#"><% if(user.getPhoneNumber() != null) out.print(user.getPhoneNumber()); %></a></p>
+                        <p><a href="#"><% if(userByID.getPhoneNumber() != null) out.print(userByID.getPhoneNumber()); %></a></p>
                     </div>
 
                     <div class="right-down-bar">
                         <p>Град</p>
 
-                        <p><% if(user.getTown() != null) out.print(user.getTown()); %></p>
+                        <p><% if(userByID.getTown() != null) out.print(userByID.getTown()); %></p>
 
                         <p>Улица</p>
 
-                        <p><% if(user.getStreet() != null) out.print(user.getStreet()); %></p>
+                        <p><% if(userByID.getStreet() != null) out.print(userByID.getStreet()); %></p>
                     </div>
                 </div>
             </div>

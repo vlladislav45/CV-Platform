@@ -1,0 +1,38 @@
+/* ------------------------------------------------------------ *\
+    Reset
+\* ------------------------------------------------------------ */
+* { padding: 0; margin: 0; box-sizing: border-box; }
+
+/* ------------------------------------------------------------ *\
+    Header
+\* ------------------------------------------------------------ */
+.header {  padding: 0 25px 0 25px; display:flex; width: auto; height: 100px; background-color: #012e5e; }
+.nav-btn a { text-decoration: none; color: #012e5e; }
+.nav-btn a:hover { text-decoration: none; color: #012e5e; }
+.nav-btn { padding: 15px; margin: auto 0; text-align: center;
+    background-color: #ffb606; border-radius: 4px; cursor: pointer;  }
+.nav-btn + .nav-btn { margin-left: 5px; }
+
+/* ------------------------------------------------------------ *\
+    Body
+\* ------------------------------------------------------------ */
+body { background: #fff !important; }
+
+/* ------------------------------------------------------------ *\
+    Main Container
+\* ------------------------------------------------------------ */
+.main { padding: 15px; }
+.main table { width: 100%; }
+
+/*Main Row and Col*/
+.main-row {  }
+.main-col { padding: 15px; background: #ffb606; color: #012e5e; }
+.main-col-1 { width: 10%; }
+.main-col-2 { width: 10%; }
+
+/*Row*/
+.row {  }
+/*Column*/
+.col { padding: 15px; border: 1px gray solid;}
+.col-3 { max-width: 1200px; color: #012e5e; }
+

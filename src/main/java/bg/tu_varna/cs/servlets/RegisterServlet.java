@@ -1,7 +1,7 @@
-package bg.tuvarna.cs.servlets;
+package bg.tu_varna.cs.servlets;
 
-import bg.tuvarna.cs.domain.entities.User;
-import bg.tuvarna.cs.domain.entities.UserSource;
+import bg.tu_varna.cs.domain.entities.User;
+import bg.tu_varna.cs.domain.entities.UserSource;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/*
- *
+/**
  * @author Vladislav Enev
-*/
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
@@ -38,10 +37,10 @@ public class RegisterServlet extends HttpServlet {
                 //TODO: logger
                 out.println("User Source is not initialized");
             }else {
-                User u = new User();
-                u.setLogin(request.getParameter("username"));
-                u.setEmail(request.getParameter("email"));
-                u.setPassword(request.getParameter("pwd"));
+                String username = request.getParameter("username");
+                String email = request.getParameter("email");
+                String password = request.getParameter("pwd");
+                User u = new User(username, email, password);
 
                 //if it is first user and tries to register, do not make statement
                 if(users.getUsers() != null) {

@@ -36,16 +36,14 @@
 
         <input class="submit" name="submit" type="submit" value="Вход">
 
-        <span id='message'></span>
-        <div class="error"><%
+        <%
             List<String> errors = (ArrayList<String>) request.getAttribute("list_errors");
             if(errors != null) {
                 for(String err : errors) {
-                    out.println(err);
+                    out.println("<div class='error'>" + err + "</div>");
                 }
             }
-        %></div>
-        <div class='success'></div>
+        %>
     </form>
 
     <footer></footer>

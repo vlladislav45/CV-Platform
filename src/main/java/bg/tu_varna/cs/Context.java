@@ -1,6 +1,6 @@
-package bg.tuvarna.cs;
+package bg.tu_varna.cs;
 
-import bg.tuvarna.cs.domain.entities.UserSource;
+import bg.tu_varna.cs.domain.entities.UserSource;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebListener;
  * @author Vladislav Enev
  */
 @WebListener
-public class Application implements ServletContextListener {
+public class Context implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

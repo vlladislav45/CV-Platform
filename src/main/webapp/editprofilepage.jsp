@@ -1,4 +1,4 @@
-<%@ page import="bg.tuvarna.cs.domain.entities.User" %><%--
+<%@ page import="bg.tu_varna.cs.domain.entities.User" %><%--
   Created by IntelliJ IDEA.
   User: Vladislav
   Date: 4/7/2020
@@ -29,7 +29,7 @@
 
 <h1>Редактиране на профил</h1>
 
-<form action="UserServlet" method="POST">
+<form action="user" method="POST">
 
     <div class="row">
         <div class="col-1 col">

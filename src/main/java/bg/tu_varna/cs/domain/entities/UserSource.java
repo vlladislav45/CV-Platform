@@ -1,4 +1,4 @@
-package bg.tuvarna.cs.domain.entities;
+package bg.tu_varna.cs.domain.entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class UserSource {
     }
 
     public void addUser(User user) {
-        users.add(new User(user.getLogin(),user.getEmail(),user.getPassword()));
+        users.add(user);
     }
 
     public User searchUser(User user) {

@@ -1,4 +1,4 @@
-package bg.tuvarna.cs.domain.entities;
+package bg.tu_varna.cs.domain.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -9,7 +9,8 @@ import java.util.Objects;
  * @author Vladislav Enev
  */
 public class User implements Serializable {
-    private static int id = 0;
+    private int id;
+    private static int idCounter = 0;
     private String login;
     private String email;
     private String password;
@@ -34,7 +35,7 @@ public class User implements Serializable {
     public User() {}
 
     public User(String login, String email, String password) {
-        setId(++id);
+        this.id = idCounter++;
         this.login = login;
         this.email = email;
         this.password = password;

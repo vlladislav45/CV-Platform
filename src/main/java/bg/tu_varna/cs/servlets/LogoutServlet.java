@@ -1,4 +1,4 @@
-package bg.tuvarna.cs.servlets;
+package bg.tu_varna.cs.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/*
- *
+/**
  * @author Vladislav Enev
  */
 @WebServlet("/logout")
@@ -25,6 +24,6 @@ public class LogoutServlet extends HttpServlet {
         session.invalidate();
 
         out.print("You are successfully logout!");
-        resp.sendRedirect("login");
+        resp.sendRedirect("index");
     }
 }
