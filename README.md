@@ -11,7 +11,7 @@ PTI
 * Filters
 
 ## Client-side technology
-* Vanilla.js because it's simple and easy for use
 * HTML5 
-* CSS for styling
+* CSS
 * JSP for dynamic front-end
+* JavaScript
