@@ -1,9 +1,11 @@
 ## CV-Platform
 PTI
 
-#TODO: Next week will be commited a new updated
+#TODO: Last update will be a next week
 
-#Comment: Databse will not be used for this project. It will be used transport technology like JSON or XML
+#Comment:
+* Updated async edit profile page
+* Databse will not be used for this project. It will be used transport technology like JSON or XML
 
 ## Server-side technology
 # Java Enterprise Edition
@@ -12,6 +14,6 @@ PTI
 
 ## Client-side technology
 * HTML5 
-* CSS
-* JSP for dynamic front-end
+* CSS3
+* JSP
 * JavaScript
