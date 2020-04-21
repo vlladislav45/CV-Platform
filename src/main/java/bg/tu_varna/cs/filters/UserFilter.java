@@ -26,9 +26,9 @@ public class UserFilter implements Filter {
                 ? (User)session.getAttribute("user")
                 : null;
 
-        if (sessionUser == null && req.getParameter("user") != null) {
+        if (sessionUser == null) {
             res.sendRedirect("index");
-        } else {
+        }else {
             filterChain.doFilter(req,res);
         }
     }

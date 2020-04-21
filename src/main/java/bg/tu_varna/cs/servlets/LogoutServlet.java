@@ -18,12 +18,13 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("utf-8");
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession();
         session.invalidate();
 
         out.print("You are successfully logout!");
-        resp.sendRedirect("index");
+        req.getRequestDispatcher("index.jsp").forward(req,resp);
     }
 }

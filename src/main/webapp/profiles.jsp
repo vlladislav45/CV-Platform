@@ -16,6 +16,20 @@
 <body>
 
     <div class="header">
+        <% if(session.getAttribute("user") != null) { %>
+        <div class="nav-btn">
+            <a href="logout">Излизане</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="profiles">Профили</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="index">Назад</a>
+        </div>
+        <%} else{ %>
+
         <div class="nav-btn">
             <a href="login">Вход</a>
         </div>
@@ -27,10 +41,7 @@
         <div class="nav-btn">
             <a href="profiles">Профили</a>
         </div>
-
-        <div class="nav-btn">
-            <a href="index">Назад</a>
-        </div>
+        <%} %>
     </div>
 
     <div class="main">

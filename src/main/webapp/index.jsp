@@ -71,7 +71,8 @@
         </div>
         <%} %>
     </div>
-    <% if(session.getAttribute("user") != null) { %>
+    <%
+        if(session.getAttribute("user") != null && user.getId() == userByID.getId()) { %>
     <div class="title">Добре дошъл, <% out.print(user.getLogin()); %></div>
     <button id="exit" name="exit" class="exit">Изключи</button>
     <%

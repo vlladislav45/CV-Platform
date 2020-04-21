@@ -9,6 +9,16 @@
 body { background: #f4f4f4; }
 
 /* ------------------------------------------------------------ *\
+    Header
+\* ------------------------------------------------------------ */
+.header { display:flex; padding: 0 25px 0 25px; width: auto; height: 100px; background-color: #012e5e; }
+.nav-btn a { text-decoration: none; color: #012e5e; }
+.nav-btn a:hover { text-decoration: none; color: #012e5e; }
+.nav-btn { padding: 15px; margin: auto 0; text-align: center;
+    background-color: #ffb606; border-radius: 4px; cursor: pointer;  }
+.nav-btn + .nav-btn { margin-left: 5px; }
+
+/* ------------------------------------------------------------ *\
     Titles
 \* ------------------------------------------------------------ */
 h1 { padding: 20px 0 20px 0; text-align: center; color: #012e5e; }
@@ -39,3 +49,8 @@ select { padding: 12px 20px; border: 1px solid #ccc; margin: 8px 0; display: inl
 
 /*TextArea*/
 textarea { width: 100%; }
+
+/* ------------------------------------------------------------ *\
+    Footer
+\* ------------------------------------------------------------ */
+footer { width: auto; height: 150px; background-color: #012e5e; }

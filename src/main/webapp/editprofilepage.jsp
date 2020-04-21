@@ -26,10 +26,42 @@
             response.sendRedirect("login");
         }
     %>
+    <div class="header">
+        <% if(session.getAttribute("user") != null) { %>
+        <div class="nav-btn">
+            <a href="index">Преглед</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="logout">Излизане</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="profiles">Профили</a>
+        </div>
+        <%} else{ %>
+
+        <div class="nav-btn">
+            <a href="login">Вход</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="register">Регистрация</a>
+        </div>
+
+        <div class="nav-btn">
+            <a href="profiles">Профили</a>
+        </div>
+        <%} %>
+    </div>
 
 <h1>Редактиране на профил</h1>
 
-<form action="user" method="POST">
+<form action="profile_info" method="POST">
+
+    <h2>Профилна информация</h2>
+
+    <input class="submit" name="profileInfo" type="submit" value="Запази">
 
     <div class="row">
         <div class="col-1 col">
@@ -48,8 +80,13 @@
             <textarea name="describe" id="describe" rows="4" maxlength="150" style="resize:none;"></textarea>
         </div>
     </div>
+</form>
+
+    <form action="profile_skills" method="post">
 
     <h2>Професионални качества</h2>
+
+    <input class="submit" name="profileSkills" type="submit" value="Запази">
 
     <div class="row">
         <div class="col-1 col">
@@ -169,6 +206,14 @@
             }
         </script>
     </select>
+</form>
+
+
+<form action="profile_additional_info" method="post">
+
+    <h2>Контакти</h2>
+
+    <input class="submit" name="profileAdditionalInfo" type="submit" value="Запази">
 
     <label class="lab" for="email">Имейл</label>
     <input name="email" id="email" type="email" placeholder="Променете имейл адреса си, ако желаете"/>
@@ -181,8 +226,6 @@
 
     <label class="lab" for="street">Улица</label>
     <input name="street" id="street" type="text" placeholder="Въведете улица"/>
-
-    <input class="submit" name="save" type="submit" value="Запази">
 
 </form>
 

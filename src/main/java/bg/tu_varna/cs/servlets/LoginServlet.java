@@ -20,12 +20,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("static/login.html").forward(req, resp);
+        req.getRequestDispatcher("static/login.html").include(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
+        resp.setCharacterEncoding("utf-8");
         PrintWriter out = resp.getWriter();
 
         ServletContext ctx = req.getServletContext();
@@ -47,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("user", loggedUser);
 
-            resp.sendRedirect("index?user=" + loggedUser.getId());
+            resp.sendRedirect("editprofile");
         }else {
             out.print("<font color=red>Incorrect username/email or password</font>");
             req.getRequestDispatcher("static/login.html").include(req,resp);
