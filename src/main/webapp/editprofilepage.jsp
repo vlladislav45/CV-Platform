@@ -229,6 +229,27 @@
 
 </form>
 
+    <script type="text/javascript">
+        document.addEventListener('submit', e => {
+
+            // Store reference to form to make later code easier to read
+            const form = e.target;
+            console.log(form);
+
+            // Post data using the Fetch API
+            fetch(form.action, {
+                method: form.method,
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                body: new FormData(JSON.stringify(form))
+            })
+
+            // Prevent the default form submit
+            e.preventDefault();
+        });
+    </script>
+
 <footer></footer>
 
 </body>
