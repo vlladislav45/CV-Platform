@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @WebServlet("/profile_skills")
@@ -44,6 +45,11 @@ public class ProfileSkillsServlet extends HttpServlet {
         newSession.removeAttribute("user");
         //We update old session because the user want to change his profile...
         newSession.setAttribute("user", u);
+        try {
+            users.marshal(users);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
 
         resp.sendRedirect("editprofile");
     }

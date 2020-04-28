@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <user>
+        <id>2</id>
+        <login>vladislavl3</login>
+        <email>vladislavl3@abv.bg</email>
+        <password>12345678</password>
+        <java>0</java>
+        <html>0</html>
+        <css>0</css>
+        <javascript>0</javascript>
+        <communicative>0</communicative>
+        <teamwork>0</teamwork>
+        <creativity>0</creativity>
+    </user>
+    <user>
+        <id>0</id>
+        <login>vladislavl2a</login>
+        <email>vladislavl2a@abv.bg</email>
+        <password>12345678</password>
+        <firstName>Владислав</firstName>
+        <lastName>Енев</lastName>
+        <describe>Няма описание за потребителя все още</describe>
+        <work>Student</work>
+        <java>0</java>
+        <html>0</html>
+        <css>0</css>
+        <javascript>0</javascript>
+        <communicative>0</communicative>
+        <teamwork>0</teamwork>
+        <creativity>0</creativity>
+        <phoneNumber>0893988959</phoneNumber>
+        <town>Dobrich</town>
+        <street>Bulevard 3 Mart  4</street>
+    </user>
+    <user>
+        <id>1</id>
+        <login>maria</login>
+        <email>maria@abv.bg</email>
+        <password>12345678</password>
+        <java>0</java>
+        <html>0</html>
+        <css>0</css>
+        <javascript>0</javascript>
+        <communicative>0</communicative>
+        <teamwork>0</teamwork>
+        <creativity>0</creativity>
+    </user>
+</users>

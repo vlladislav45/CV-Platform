@@ -1,16 +1,21 @@
 package bg.tu_varna.cs.domain.entities;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.Objects;
 
 /*
- * Entity
- * JavaBean
+ * Entity(JavaBean)
  * @author Vladislav Enev
  */
-public class User implements Serializable {
+@XmlRootElement(name = "user")
+@XmlType(propOrder = { "id", "login", "email", "password", "firstName", "lastName", "describe", "work", "java",
+"html", "css", "javascript", "communicative", "teamwork", "creativity", "phoneNumber", "town", "street"})
+public class User {
     private int id;
-    private static int idCounter = 0;
     private String login;
     private String email;
     private String password;
@@ -32,10 +37,10 @@ public class User implements Serializable {
     private String town;
     private String street;
 
-    public User() {}
+    public User() { }
 
-    public User(String login, String email, String password) {
-        this.id = idCounter++;
+    public User(int idCounter, String login, String email, String password) {
+        this.id = idCounter;
         this.login = login;
         this.email = email;
         this.password = password;

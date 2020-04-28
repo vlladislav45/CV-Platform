@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 /**
  * @author Vladislav Enev
@@ -34,13 +36,13 @@ public class RegisterServlet extends HttpServlet {
             ServletContext ctx = request.getServletContext();
             UserSource users = (UserSource) ctx.getAttribute("users");
             if(users == null) {
-                //TODO: logger
                 out.println("User Source is not initialized");
             }else {
                 String username = request.getParameter("username");
                 String email = request.getParameter("email");
                 String password = request.getParameter("pwd");
-                User u = new User(username, email, password);
+                int id = (users.getUsers().size() - 1) + 1;
+                User u = new User(id,username, email, password);
 
                 //if it is first user and tries to register, do not make statement
                 if(users.getUsers() != null) {
@@ -51,6 +53,11 @@ public class RegisterServlet extends HttpServlet {
                     }
                 }
                 users.addUser(u);
+                try {
+                    users.marshal(users);
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
 
                 response.sendRedirect("login");
             }

@@ -16,7 +16,10 @@
 <body>
 
     <div class="header">
-        <% if(session.getAttribute("user") != null) { %>
+        <% if(session.getAttribute("user") != null) {
+            final String URL = "index";
+            User u = (User) session.getAttribute("user");
+        %>
         <div class="nav-btn">
             <a href="logout">Излизане</a>
         </div>
@@ -26,7 +29,7 @@
         </div>
 
         <div class="nav-btn">
-            <a href="index">Назад</a>
+            <%out.print("<a href='"+ URL + "?user=" + u.getId() + "'>");%> Назад  <% out.print("</a>"); %>
         </div>
         <%} else{ %>
 
@@ -60,7 +63,7 @@
 
                 for(User u : users.getUsers()) {
                     out.print("<tr class='row'>");
-                    out.print("<td class='col'><a href='"+ URL + "?user=" + u.getId() + "'>" + u.getFirstName() + " " + u.getLastName() + "</a></td>");
+                    out.print("<td class='col'><a href='"+ URL + "?user=" + u.getId() + "'>"+ u.getId() + " " + u.getFirstName() + " " + u.getLastName() + "</a></td>");
                     out.print("<td class='col'>" + u.getWork() + "</td>");
                     out.print("<td class='col col-3'>" + u.getDescribe() + "</td>");
                     out.print("</tr>");

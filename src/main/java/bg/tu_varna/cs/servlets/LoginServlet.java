@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private User loggedUser;
+    private static int id = 1;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,10 +32,8 @@ public class LoginServlet extends HttpServlet {
         ServletContext ctx = req.getServletContext();
         UserSource users = (UserSource) ctx.getAttribute("users");
 
-        //ONLY FOR TESTS
-        users.addUser(testAddUser());
-
         User u = new User();
+        //u.setId(++id);
         u.setLogin(req.getParameter("login"));
         u.setPassword(req.getParameter("pwd"));
 
@@ -43,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         //users.addUser(u);
 
         if(users.searchUser(u) != null) {
-            this.loggedUser = users.searchUser(u);
+            User loggedUser = users.searchUser(u);
 
             HttpSession session = req.getSession();
             session.setAttribute("user", loggedUser);
@@ -53,27 +51,6 @@ public class LoginServlet extends HttpServlet {
             out.print("<font color=red>Incorrect username/email or password</font>");
             req.getRequestDispatcher("static/login.html").include(req,resp);
         }
-    }
-
-    private static User testAddUser() {
-        //Only for TESTS
-        User u = new User("vladislavl3", "vladislavl3@abv.bg", "123456");
-        u.setDescribe("Студент, който малко бачка по проектите си");
-        u.setWork("Студент");
-        u.setCommunicative(5);
-        u.setCreativity(2);
-        u.setCss(4);
-        u.setFirstName("ivan");
-        u.setJava(3);
-        u.setJavascript(5);
-        u.setLastName("Бонев");
-        u.setHtml(6);
-        u.setPhoneNumber("0893933345");
-        u.setStreet("Бул 5 Юни");
-        u.setTeamwork(10);
-        u.setTown("София");
-
-        return u;
     }
 
 }

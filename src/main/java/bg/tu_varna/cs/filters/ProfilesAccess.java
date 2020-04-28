@@ -25,7 +25,7 @@ public class ProfilesAccess implements Filter{
                 ? (User)session.getAttribute("user")
                 : null;
         if (sessionUser == null) {
-            res.sendRedirect(req.getContextPath());
+            res.sendRedirect("login");
         } else {
             chain.doFilter(request, response);
         }

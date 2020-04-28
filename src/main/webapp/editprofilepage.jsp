@@ -27,9 +27,11 @@
         }
     %>
     <div class="header">
-        <% if(session.getAttribute("user") != null) { %>
+        <% if(session.getAttribute("user") != null) {
+            final String URL = "index";
+        %>
         <div class="nav-btn">
-            <a href="index">Преглед</a>
+            <%out.print("<a href='"+ URL + "?user=" + u.getId() + "'>");%> Преглед  <% out.print("</a>"); %>
         </div>
 
         <div class="nav-btn">
